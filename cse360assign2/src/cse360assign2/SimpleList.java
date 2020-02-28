@@ -1,11 +1,16 @@
 /**
  * Colin Weinstein
- * CSE 360 - Assignment 1
+ * CSE 360 - Assignment 2
  * SimpleList.java
- * February 10, 2020
+ * February 27, 2020
  */
 package cse360assign2;
 
+/**
+ * @author Colin Weinstein
+ * SimpleList.java creates empty list of 10 ints with count initialized to 0.
+ * Methods: add, append, remove, count, first, last, size, search, toString
+ */
 public class SimpleList {
 	private int[] list;
 	private int count;
@@ -15,7 +20,7 @@ public class SimpleList {
 	 */
 	SimpleList() {
 		// creates new list and sets list = newList
-		int[] list = new int[10];
+		list = new int[10];
 		count = 0;
 	}
 	
@@ -41,7 +46,7 @@ public class SimpleList {
 			list = newList;	// sets list equal to the newly created list
 		} // ends else if (count != 0)
 		else if (count == list.length) {
-			int[] newList = new int[(int) (count * 1.5)];
+			int[] newList = new int[(int) (list.length * 1.5)];
 			newList[0] = intToAdd;
 			
 			// adds existing ints
@@ -53,7 +58,7 @@ public class SimpleList {
 		count++;
 	} // end of add
 	
-	
+
 	/**
 	 * append(int input) method adds new input to end of list
 	 */
@@ -61,7 +66,7 @@ public class SimpleList {
 		if (count < list.length)
 			list[count] = intToAppend;	// add int at index 0 if list is empty
 		else if (count == list.length) {
-			int[] newList = new int[(int) (count * 1.5)];
+			int[] newList = new int[(int) (list.length * 1.5)];
 			// adds existing ints
 			for (int iterator = 0; iterator < count; iterator++)
 				newList[iterator] = list[iterator];
@@ -92,7 +97,7 @@ public class SimpleList {
 			} // end else if count > .75 * list.lenght
 			else if (count < .75 * list.length) {
 				if (list.length != 1) {
-					int[] newList = new int[(int) (count * .75)];
+					int[] newList = new int[(int) (list.length * .75)];
 					for (int iterator = 0; iterator < index; iterator++)
 						newList[iterator] = list[iterator];
 					for (int iterator = index + 1; iterator < count; iterator++)
@@ -106,13 +111,13 @@ public class SimpleList {
 	
 	
 	/**
-	 * count() method returns current list count
+	 * count() method returns count of current list
 	 */
 	int count () {
 		return count;
 	} // end of count
 	
-	
+
 	/**
 	 * first() method returns first element in the list, or -1 if there are no elements
 	 */
@@ -144,33 +149,33 @@ public class SimpleList {
 	
 	
 	/**
+	 * toString() overloads default toString() method
+	 * - outputs contents of list and count
+	 */
+	public String toString () {
+		String outString = "";
+		for (int iterator = 0; iterator < count - 1; iterator++) {
+			outString = outString + list[iterator] + " ";
+		}
+		outString = outString + list[count - 1] + "\nCount: " + count + "\n";
+		return outString;
+	} // end of toString
+	
+	
+	/**
 	 * search(int input) method returns index of input if found in list
 	 * - if input is not found, search returns -1
 	 */
 	int search (int intToFind) {		
 		int iterator = 0;
 		int index = -1;
-		while (iterator < count && list[iterator] != intToFind) {
+		// searches until end of list or until int is found in list
+		while (iterator < count) {
+			if (list[iterator] == intToFind)
+				index = iterator; // sets index = iterator if found
 			iterator++;
 		}
-		if (list[iterator] == intToFind)
-			index = iterator;	// sets index = iterator if found
 		return index;			// returns index found or -1 if not found
-	} // end of search
-	
-	
-	/**
-	 * toString() overloads default toString() method
-	 * - outputs contents of list and count
-	 */
-	public String toString () {
-		String outString = "";
-		for (int iterator = 0; iterator < count; iterator++) {
-			outString = outString + list[iterator] + " ";
-		}
-		outString = outString + "\nCount: " + count + "\n";
-		return outString;
-	} // end of toString
-
+	}
 }
 
